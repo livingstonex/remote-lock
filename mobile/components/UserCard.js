@@ -1,61 +1,60 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, TextBase } from "react-native";
+import UserInfo from "./utilities/UserInfo";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    marginTop: "5px",
-    flexDirection: "row"
-  }
+    marginTop: "10px",
+    padding: "10px",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+  },
+
+  col: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    marginRight: "20px",
+  },
+
+  img: {
+    // borderRadius: "50%",
+    width: "70px",
+    height: "70px",
+  },
+
+  status: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
 });
-
-function UserStartEndTime({ starts_at, ends_at, device_time_zone }) {
-  return (
-    <Text>
-      {starts_at} - {ends_at}
-    </Text>
-  );
-}
-
-const statusColors = { current: "#C5F6A7", upcoming: "#F4F6A7" };
-
-function UserStatus({ status }) {
-  const styles = { backgroundColor: statusColors[status] };
-  return <Text style={styles}>{status}</Text>;
-}
-
-function UserInfo({
-  name,
-  email,
-  status,
-  starts_at,
-  ends_at,
-  device_time_zone
-}) {
-  return (
-    <View style={{ flexDirection: "column" }}>
-      <Text>{name}</Text>
-      <Text style={{ color: "#EFEFEF" }}>{email}</Text>
-      <UserStartEndTime
-        starts_at={starts_at}
-        ends_at={ends_at}
-        device_time_zone={device_time_zone}
-      />
-      <UserStatus status={status} />
-    </View>
-  );
-}
 
 function UserCard({ item: { attributes } }) {
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: "http://placekitten.com/g/30/30",
-          height: "30px",
-          width: "30px"
-        }}
-      />
+    <View
+      style={{
+        flexDirection: "row",
+        padding: "20px",
+        backgroundColor: "white",
+        marginTop: "5px",
+        width: "100%",
+      }}
+    >
+      <View style={{ flexDirection: "column" }}>
+        <View style={{ marginRight: "10px" }}>
+          <Image
+            source={{
+              uri: "http://placekitten.com/g/30/30",
+              height: "30px",
+              width: "30px",
+            }}
+            style={{ width: "70px", height: "70px", borderRadius: "50%" }}
+          />
+        </View>
+      </View>
+
       <UserInfo {...attributes} />
     </View>
   );
